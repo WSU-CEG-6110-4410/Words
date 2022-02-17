@@ -1,0 +1,40 @@
+#ifndef StoredString_H
+#define StoredString_H
+
+#include <string>
+
+/// This entire project is part of a demonstration for Wright State University
+/// (WSU) CSE-4110 "Intro. Software Eng." Spring 2021.
+namespace WSU {
+
+/// \anchor Model Model Subsystem
+///
+/// This Module contains components that are part of the Model subsystem within
+/// the overall [MVC
+/// Design](md__home_user_WordsExampleSpring2022_Overview.html).
+namespace Model {
+
+/// Issue10: This class implements the core of the Model subsystem with and
+/// provides storage for a string.
+class StoredString {
+private:
+  /// Issue#11: This member variable is used to store the characters of a string
+  /// [Issue#16](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/16)
+  std::string m_string;
+
+public:
+  /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
+  /// \return reference to the stored string.
+  const std::string &getString() const { return m_string; }
+
+  /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
+  /// This function appends a single character to the stored string.
+  ///
+  ///\param c : The character to append
+  void appendCharacter(char c);
+}; // class StoredString
+
+} // namespace Model
+} // namespace WSU
+
+#endif // StoredString_H
