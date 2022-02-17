@@ -18,4 +18,4 @@ The Model subsystem stores the information and defines operations that may be pe
 The View subsystem provides one or more ways to view or edit information stored within the Model subsystem.
 
 ### Controller
-The Controller subsystem decouples the Model and View subsystems so that the Model implementation may be changed without requiring changes to the View subsystem, and teh View subsystem implementation may be changed without requiring changes to te Model subsystem. The View is not allowed to know about the Model implementation and vise versa. The Controller is responsible for loading or creating the Model and for loading or creating the View.
+The Controller subsystem decouples the Model and View subsystems so that the Model implementation may be changed without requiring changes to the View subsystem, and the View subsystem implementation may be changed without requiring changes to the Model subsystem. The View is not allowed to know about the Model implementation and vise versa. The Controller is responsible for loading or creating the Model and for loading or creating the View.
