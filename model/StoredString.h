@@ -14,24 +14,26 @@ namespace WSU {
 /// Design](md__home_user_WordsExampleSpring2022_Overview.html).
 namespace Model {
 
-/// Issue10: This class implements the core of the Model subsystem with and
-/// provides storage for a string.
-class StoredString {
-private:
-  /// Issue#11: This member variable is used to store the characters of a string
-  /// [Issue#16](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/16)
-  std::string m_string;
+  /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/7)
+  /// This class implements the core of the Model subsystem with and
+  /// provides storage for a string.
+  class StoredString
+  {
+  private:
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/7)
+    /// This member variable is used to store the characters of a string.
+    std::string m_string;
 
-public:
-  /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
-  /// \return reference to the stored string.
-  const std::string &getString() const { return m_string; }
+  public:
+    /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
+    /// \return reference to the stored string.
+    const std::string &getString() const { return m_string; }
 
-  /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
-  /// This function appends a single character to the stored string.
-  ///
-  ///\param c : The character to append
-  void appendCharacter(char c);
+    /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
+    /// This function appends a single character to the stored string.
+    ///
+    ///\param c : The character to append
+    void appendCharacter(char c);
 }; // class StoredString
 
 } // namespace Model
