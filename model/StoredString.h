@@ -25,11 +25,11 @@ namespace Model {
     std::string m_string;
 
   public:
-    /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/9)
     /// \return reference to the stored string.
     const std::string &getString() const { return m_string; }
 
-    /// [Issue#13](https://github.com/WSU-CEG-6110-4410/WordsExampleSpring2022/issues/13)
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/9)
     /// This function appends a single character to the stored string.
     ///
     ///\param c : The character to append
