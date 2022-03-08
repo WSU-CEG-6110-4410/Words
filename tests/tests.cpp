@@ -7,12 +7,15 @@ TEST(assert, issue11) {
   ASSERT_NO_FATAL_FAILURE(WSU::Model::StoredString storedString{});
 }
 
-TEST(assert, issue11_zeroContenets) {
+/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/7)
+TEST(assert, issue7_zeroContents)
+{
   WSU::Model::StoredString storedString{};
   GTEST_ASSERT_EQ("", storedString.getString());
 }
 
-TEST(assert, issue13_append) {
+/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/9)
+TEST(assert, issue9_append) {
   WSU::Model::StoredString storedString{};
   GTEST_ASSERT_EQ("", storedString.getString());
   storedString.appendCharacter('W');
