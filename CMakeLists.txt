@@ -105,4 +105,8 @@ if(CLANG_FORMAT)
     add_dependencies(format ${PROJECT_NAME}_format)
 endif()
 
-add_dependencies(format tests)
+# Format code _before_ building so that formatting will not change
+# the code after compiling the code. If the code is modified after
+# compile, then the build system will think the code needs to be
+# compiled again.
+add_dependencies(tests format)
