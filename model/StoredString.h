@@ -50,9 +50,45 @@ public:
   /// character inserted by this function. If index equals the
   /// current length of the stored string, character insertion
   /// produces the same result as the appendCharacter(char) function.
-  /// If an index greater than the current length
-  /// of the stored string is specified, the stored string is not modified.
+  /// If an index greater than the current length of the stored string is
+  /// specified, the stored string is not modified.
   void insertCharacterAtIndex(char c, std::size_t index);
+
+  /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/14)
+  /// This function inserts all of teh characters in s into the stored string
+  /// starting at index within the stored string. All characters in the stored
+  /// string before the insert remain in the stored string after the insert.
+  /// Charcaters from index to the end of the string are moved to
+  /// new indexes starting at index plus the length of s in order to make room
+  /// for the character inserted by this function. If index equals the current
+  /// length of the stored string, the characters of s are appended to the
+  /// stored string. If an index greater than the current length of the stored
+  /// string is specified, the stored string is not modified.
+  void insertStringAtIndex(const std::string &s, std::size_t index);
+
+  /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/14)
+  /// This function inserts all of teh characters in s into the stored string
+  /// starting at index within the stored string. All characters in the stored
+  /// string before the insert remain in the stored string after the insert.
+  /// Charcaters from index to the end of the string are moved to
+  /// new indexes starting at index plus the length of s in order to make room
+  /// for the character inserted by this function. If index equals the current
+  /// length of the stored string, the characters of s are appended to the
+  /// stored string. If an index greater than the current length of the stored
+  /// string is specified, the stored string is not modified.
+  void insertStringAtIndex(const char *s, std::size_t index);
+
+  /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/14)
+  /// This function inserts all of teh characters in s into the stored string
+  /// starting at index within the stored string. All characters in the stored
+  /// string before the insert remain in the stored string after the insert.
+  /// Charcaters from index to the end of the string are moved to
+  /// new indexes starting at index plus the length of s in order to make room
+  /// for the character inserted by this function. If index equals the current
+  /// length of the stored string, the characters of s are appended to the
+  /// stored string. If an index greater than the current length of the stored
+  /// string is specified, the stored string is not modified.
+  void insertStringAtIndex(const StoredString &s, std::size_t index);
 
 }; // class StoredString
 

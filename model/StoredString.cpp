@@ -16,6 +16,22 @@ void StoredString::insertCharacterAtIndex(char c, std::size_t index) {
   }
 }
 
+void StoredString::insertStringAtIndex(const std::string &s,
+                                       std::size_t index) {
+  if (index <= m_string.size()) {
+    m_string.insert(index, s);
+  }
+}
+
+void StoredString::insertStringAtIndex(const char *s, std::size_t index) {
+  insertStringAtIndex(std::string(s), index);
+}
+
+void StoredString::insertStringAtIndex(const StoredString &s,
+                                       std::size_t index) {
+  insertStringAtIndex(s.getString(), index);
+}
+
 } // namespace Model
 
 } // namespace WSU
