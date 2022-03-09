@@ -34,7 +34,14 @@ namespace Model {
     ///
     ///\param c : The character to append
     void appendCharacter(char c);
-}; // class StoredString
+
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/11)
+    /// This function removes a single character at the specified 
+    /// index from the stored string.
+    ///
+    ///\param index : a valid index within the stored string
+    void removeCharacterAtIndex(std::size_t index);
+  }; // class StoredString
 
 } // namespace Model
 } // namespace WSU
