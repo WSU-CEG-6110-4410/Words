@@ -32,6 +32,22 @@ void StoredString::insertStringAtIndex(const StoredString &s,
   insertStringAtIndex(s.getString(), index);
 }
 
+StoredString::Command::Command(StoredString::p_t storedString_p) {
+  assert(nullptr != storedString_p);
+  m_storedString_p = storedString_p;
+}
+
+StoredString::p_t StoredString::Command::getStoredString() const {
+  return m_storedString_p;
+}
+
+// StoredString::factoryMap_t &StoredString::getNameToFactoryMap()
+// {
+//   static StoredString::factoryMap_t nameToFactoryMap;
+
+//   return nameToFactoryMap;
+// }
+
 } // namespace Model
 
 } // namespace WSU

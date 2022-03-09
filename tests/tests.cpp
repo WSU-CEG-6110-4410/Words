@@ -9,7 +9,7 @@ TEST(StoredString, issue7_createStoredString) {
 }
 
 /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/7)
-TEST(StoredString, issue7_zeroContenets) {
+TEST(StoredString, issue7_zeroContents) {
   WSU::Model::StoredString storedString{};
   GTEST_ASSERT_EQ("", storedString.getString());
 }
@@ -43,8 +43,7 @@ TEST(StoredString, issue11_remove) {
 }
 
 /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/10)
-TEST(StoredString, issue10_insertChar)
-{
+TEST(StoredString, issue10_insertChar) {
   WSU::Model::StoredString storedString{};
 
   // Insert into empty string
@@ -69,8 +68,7 @@ TEST(StoredString, issue10_insertChar)
 }
 
 /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/10)
-TEST(StoredString, issue10_insertString)
-{
+TEST(StoredString, issue10_insertString) {
   WSU::Model::StoredString storedString{};
 
   // Insert into empty string
@@ -120,10 +118,20 @@ TEST(StoredString, issue10_insertString)
 
   // Inserting StoredString into itself at middle
   storedString.insertStringAtIndex(storedString, 1);
-  GTEST_ASSERT_EQ("WWorld!World!World!World!orld!World!World!World!", storedString.getString());
+  GTEST_ASSERT_EQ("WWorld!World!World!World!orld!World!World!World!",
+                  storedString.getString());
 }
 
-int main(int argc, char *argv[]) {
+/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/10)
+TEST(StoredString, issue15_commands)
+{
+  WSU::Model::StoredString::p_t ss_p{new WSU::Model::StoredString{}};
+
+  ASSERT_NE(nullptr, ss_p);
+}
+
+int main(int argc, char *argv[])
+{
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
