@@ -1,6 +1,5 @@
 # WordsExampleSpring2022
 
-@mainpage Project
 This entire project is part of a demonstration for Wright State University (WSU) CSE-6110/4110 "Intro. Software Eng." Spring 2022.
 
 ## Overview
@@ -19,4 +18,16 @@ One advantage of creating design documentation directly in source code is to mit
 Another advantage is that printing design documentation may almost always be avoided by using the generated electronic documentation instead. If somebody needs the most up to date design information, generate the document directly from the source code on demand. It only takes seconds. Documentation generation may even be added to automated software build systems.
 
 ## Software Architecture
-[Architecture](md__home_user_WordsExampleSpring2022_Overview.html)
+[Architecture](./Overview.md)
+
+## Tools
+In addition to GitHub, this project uses
+
+- Requirements (User Stories/Tasks) are maintained as Issues in GitHub using the GitHub Projecst Beta system to track Issue state.
+- clang/clang++ compilers
+- cang-format to enforce coding standard
+- doxygen for documentation generation including design documentation
+- googletest for automated stesting
+- clang-cov/gcov for code coverage during test
+- cmake for makefile generation and dependency tracking
+- all Linux build tools installed from build-essential RPM

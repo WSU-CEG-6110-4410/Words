@@ -9,7 +9,8 @@ TEST(StoredString, issue7_createStoredString) {
 }
 
 /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/7)
-TEST(StoredString, issue7_zeroContenets) {
+TEST(assert, issue7_zeroContents)
+{
   WSU::Model::StoredString storedString{};
   GTEST_ASSERT_EQ("", storedString.getString());
 }
