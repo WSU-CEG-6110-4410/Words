@@ -30,40 +30,6 @@ namespace Model {
         }
 
     public:
-        /// This class exists to install Command factories associated with names
-        /// so that Command instances may be created by looking up named
-        /// factories and using the factories to create the Command instances.
-        /// See [Factory Design
-        /// Pattern](https://www.oodesign.com/factory-pattern.html). \ref R3_1_1
-        /// Scripts contain human readable command names. The names may be used
-        /// to lookup installed factories, and then the factories may be used to
-        /// create instances of the named Commands.
-        //   class FactoryInstaller {
-        //   protected:
-        //     /// \ref R3_1_1 As an implementation detail, [JavaScript Object
-        //     Notation
-        //     /// (JSON)](https://www.json.org/json-en.html)  is chosen as a
-        //     human
-        //     /// readable format .
-        //     typedef json11::Json arguments_t;
-        //     /// Commands encapsulate the information needed to run the
-        //     command at a
-        //     /// later time. This method  must be implemented in all
-        //     subclasses of those
-        //     /// class to encapsulate (that is store) needed information.
-        //     \param args
-        //     /// \imp \ref R3_1_1 A script needs to be human readable. That
-        //     implies the
-        //     /// arguments to a command are human readable too. The args
-        //     parameter is
-        //     /// intended to contain a human readable string of command
-        //     arguments such as
-        //     /// the argument that may be present in a script. \return true
-        //     iff args are
-        //     /// successful parsed and encapsulated. Return false otherwise.
-        //     static arguments_t parse(const std::string &args);
-        //   };
-
         /// To do, undo, or redo and operation, it is necessary to
         /// "run" the operation.
         virtual void run() = 0;

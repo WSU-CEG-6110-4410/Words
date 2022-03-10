@@ -27,9 +27,11 @@ FetchContent_MakeAvailable(googletest)
 add_executable(tests) 
 target_include_directories(tests PUBLIC model)
 target_sources(tests PUBLIC 
+   model/InsertCharacterAtIndexCommand.cpp
    model/StoredString.cpp
    model/StoredString.h
-   tests/tests.cpp)
+   tests/tests.cpp
+   tests/commandTests.cpp)
 target_link_libraries(tests PRIVATE gtest) # link google test to this executable
 set_property(TARGET tests PROPERTY CXX_STANDARD 11)
 
