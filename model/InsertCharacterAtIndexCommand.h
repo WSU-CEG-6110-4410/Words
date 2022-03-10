@@ -9,7 +9,7 @@
 namespace WSU {
 namespace Model {
 
-    /// \imp \ref R1_3 The mechanism for inserting a character at an index in
+    /// The mechanism for inserting a character at an index in
     /// the stored string is to run() and instance of this class.
     class InsertCharacterAtIndexCommand : public StoredString::Command {
     private:
@@ -30,7 +30,6 @@ namespace Model {
 
         virtual void run();
         virtual p_t makeReciprocalCommand();
-        virtual std::string getStringRepresentation();
     };
 
 } // namespace Model

@@ -30,8 +30,9 @@ namespace Model {
         }
 
     public:
-        /// To do, undo, or redo and operation, it is necessary to
-        /// "run" the operation.
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15) /// To
+        /// do, undo, or redo and operation, it is necessary to "run" the
+        /// operation.
         virtual void run() = 0;
 
         /// C++ has a well established idiom know as
@@ -45,18 +46,10 @@ namespace Model {
         /// the language.
         void operator()() { run(); }
 
-        /// In order to be able to undo a command, the reciprocal of
-        /// the command is needed. \imp \ref R2_2 In order to redo an undo
-        /// command, the reciprocal of the command executed as part of undo is
-        /// needed.
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
+        /// In order to be able to undo a command, the reciprocal of the command
+        /// is needed.
         virtual p_t makeReciprocalCommand() = 0;
-
-        /// \imp \ref R3_0 In order to create a script of commands, it is
-        /// necessary to have string representations of the commands \imp \ref
-        /// R3_1 A script will consist of a sequence of commands identified by
-        /// their string representations \imp \ref R3_1_1 String representations
-        /// are human readable
-        virtual std::string getStringRepresentation() = 0;
     };
 
 } // namespace Model

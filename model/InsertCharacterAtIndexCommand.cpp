@@ -1,4 +1,5 @@
 #include "InsertCharacterAtIndexCommand.h"
+#include "RemoveCharacterAtIndexCommand.h"
 #include <cassert>
 #include <functional>
 
@@ -22,12 +23,8 @@ namespace Model {
 
     Command::p_t InsertCharacterAtIndexCommand::makeReciprocalCommand()
     {
-        return nullptr;
-    }
-
-    std::string InsertCharacterAtIndexCommand::getStringRepresentation()
-    {
-        return "";
+        return Command::p_t { new RemoveCharacterAtIndexCommand {
+            getStoredString(), m_storedStringIndex } };
     }
 
 } // namespace Model

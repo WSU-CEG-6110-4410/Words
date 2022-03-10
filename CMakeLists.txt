@@ -28,6 +28,7 @@ add_executable(tests)
 target_include_directories(tests PUBLIC model)
 target_sources(tests PUBLIC 
    model/InsertCharacterAtIndexCommand.cpp
+   model/RemoveCharacterAtIndexCommand.cpp
    model/StoredString.cpp
    model/StoredString.h
    tests/tests.cpp
