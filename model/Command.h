@@ -30,7 +30,8 @@ namespace Model {
         }
 
     public:
-        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15) /// To
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
+        /// To
         /// do, undo, or redo and operation, it is necessary to "run" the
         /// operation.
         virtual void run() = 0;

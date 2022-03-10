@@ -25,14 +25,16 @@ FetchContent_MakeAvailable(googletest)
 
 ###############################################################################
 add_executable(tests) 
-target_include_directories(tests PUBLIC model)
+target_include_directories(tests PUBLIC model controller)
 target_sources(tests PUBLIC 
    model/InsertCharacterAtIndexCommand.cpp
    model/RemoveCharacterAtIndexCommand.cpp
    model/StoredString.cpp
    model/StoredString.h
+   controller/UndoRedoManager.cpp
    tests/tests.cpp
-   tests/commandTests.cpp)
+   tests/commandTests.cpp
+   tests/undoRedoTests.cpp)
 target_link_libraries(tests PRIVATE gtest) # link google test to this executable
 set_property(TARGET tests PROPERTY CXX_STANDARD 11)
 
