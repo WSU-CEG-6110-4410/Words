@@ -92,10 +92,7 @@ if(CLANG_FORMAT)
 
     add_custom_target(
         ${PROJECT_NAME}_format
-        COMMAND clang-format
-        -i
-        -style=file
-        ${ALL_CXX_SOURCE_FILES}
+        COMMAND clang-format -i -style=file ${ALL_CXX_SOURCE_FILES}
     )
 
     if(NOT TARGET format)
