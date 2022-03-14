@@ -1,5 +1,5 @@
-#ifndef Command_hpp
-#define Command_hpp
+#ifndef Command_H
+#define Command_H
 
 //#include "json11.hpp"
 #include <functional>
@@ -56,4 +56,4 @@ namespace Model {
 } // namespace Model
 } // namespace WSU
 
-#endif /* Command_hpp */
+#endif /* Command_H */
