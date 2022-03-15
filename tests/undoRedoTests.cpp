@@ -26,8 +26,8 @@ TEST(UndoRedo, issue15_UndoRedoManager_runCommand)
     GTEST_ASSERT_EQ("H", string_p->getString());
 }
 
-/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
-TEST(UndoRedo, issue15_UndoRedoManager_undo)
+/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/16)
+TEST(UndoRedo, issue16_UndoRedoManager_undo)
 {
     auto manager_p
         = std::shared_ptr<UndoRedoManager> { new UndoRedoManager {} };
@@ -40,8 +40,8 @@ TEST(UndoRedo, issue15_UndoRedoManager_undo)
     GTEST_ASSERT_EQ("", string_p->getString());
 }
 
-/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
-TEST(UndoRedo, issue15_UndoRedoManager_redo)
+/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/17)
+TEST(UndoRedo, issue17_UndoRedoManager_redo)
 {
     auto manager_p
         = std::shared_ptr<UndoRedoManager> { new UndoRedoManager {} };
