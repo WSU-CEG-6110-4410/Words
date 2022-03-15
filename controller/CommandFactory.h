@@ -76,8 +76,35 @@ namespace Controller {
             Model::StoredString::p_t storedString_p, const std::string& args);
     };
 
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
+    /// This class runs scripts read from inputStream. Scripts have one command
+    /// per line. Each line has a command name followed by the string encoding
+    /// of a JSON object that supplies arguments to the named command.
+    ///
+    /// Example:
+    ///```
+    /// insertCharacterAtIndex {"character" : "!","index" : 0}
+    /// insertCharacterAtIndex {"character" : "d","index" : 0}
+    /// insertCharacterAtIndex {"character" : "l","index" : 0}
+    /// insertCharacterAtIndex {"character" : "r","index" : 0}
+    /// insertCharacterAtIndex {"character" : "o","index" : 0}
+    /// insertCharacterAtIndex {"character" : "w","index" : 0}
+    /// insertCharacterAtIndex {"character" : " ","index" : 0}
+    /// insertCharacterAtIndex {"character" : "!","index" : 0}
+    /// insertCharacterAtIndex {"character" : "H","index" : 0}
+    /// insertCharacterAtIndex {"character" : "e","index" : 1}
+    /// insertCharacterAtIndex {"character" : "l","index" : 2}
+    /// insertCharacterAtIndex {"character" : "o","index" : 3}
+    /// insertCharacterAtIndex {"character" : "l","index" : 3}
+    /// removeCharacterAtIndex {"index" : 5}
+    ///```
     class ScriptRunner {
     public:
+        /// This function runs a script read from inputStream.
+        ///
+        ///\param[in] inputStream : a stream to read
+        ///\param[in] storedString_p : a pointer to the StoredString to be
+        ///manipulated by the script
         static void run(
             std::istream& inputStream, Model::StoredString::p_t storedString_p);
     };
