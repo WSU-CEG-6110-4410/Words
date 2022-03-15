@@ -22,10 +22,14 @@ namespace Controller {
         bool m_isUndoing { false };
 
     public:
-        /// 
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/16)
+        /// Call this function to undo the most recent command run via
+        /// runCommand() that hasn't already been undone.
         void undo();
 
-        /// 
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/17)
+        /// Call this function to redo the most recently undone command that
+        /// hasn't already been redone.
         void redo();
 
         /// This function pushes a reciprocal of
