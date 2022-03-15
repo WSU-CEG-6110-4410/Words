@@ -76,7 +76,7 @@ namespace Controller {
             Model::StoredString::p_t storedString_p, const std::string& args);
     };
 
-    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/20)
     /// This class runs scripts read from inputStream. Scripts have one command
     /// per line. Each line has a command name followed by the string encoding
     /// of a JSON object that supplies arguments to the named command.
