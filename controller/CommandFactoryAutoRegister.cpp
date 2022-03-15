@@ -2,14 +2,36 @@
 #include "InsertCharacterAtIndexCommand.h"
 #include "RemoveCharacterAtIndexCommand.h"
 #include "json11.hpp"
+#include <array>
 #include <cassert>
 #include <iostream>
 
 namespace WSU {
 namespace Controller {
 
+    /// This is a base class for classes used to automatically form
+    /// associations between string names and corresponding functions that
+    /// return instances of concrete Model::Command sunclasses. The functions
+    /// that return command isntances accept a string argument that contains
+    /// JavaScript Object Notation ([JSON](Model::Command) ) formatted data to
+    /// be used when creating command instances. The specific data encoded in
+    /// JSON varries based on the type command instance to be created.
+    ///
+    /// This class is an implementation detail of the design to satisfy
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19).
     class CommandFactoryAutoRegister {
     public:
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
+        /// A human readable scripting language may be comprised of strings.
+        /// JSON is selected as a consise string format for representing
+        /// scripting langauge commands and related arguments. This function
+        /// parses a string containing JSON formatted data and returns the
+        /// corresponding JSON object. If parsing the string of JSON format data
+        /// fails, and empty JSON object is returned and a string describing the
+        /// error is output to stderr.
+        ///
+        ///\param[in] s : The string containing JSON format data
+        ///\return a JSON object containing data decoded from s
         static json11::Json parse(const std::string& s)
         {
             std::string err;
@@ -21,10 +43,32 @@ namespace Controller {
         }
     };
 
+    /// This class is an implementation detail of the design to satisfy
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19).
+    /// A single compile time instance of this class automatically form
+    /// an association between the string name, s_name, and a corresponding
+    /// functions that return instances of a concrete Model::Command sunclass.
     struct InsertCharacterAtIndexAutoRegister : CommandFactoryAutoRegister {
-
+        /// The name of the command as the name will appear in scripts
         static constexpr const char* s_name { "insertCharacterAtIndex" };
 
+        /// This function returns a pointer to an instance of a concrete
+        /// subclass of Model::Command. This function serves as the function
+        /// component of the name to function association maintained by
+        /// CommandFactoryRegistry. This function is used to convert JSON format
+        /// scripting language statements/objects into corresponding
+        /// Model::Command instances at run time. If any error decoding the JSON
+        /// format data occurs at run time, a descriptive error message is
+        /// output to stderr, and nullptr is returned.
+        ///
+        ///\param[in] storedString_p : The StoredString to be manipulated by the
+        /// returned command \parma[in] args : A string containing JSON
+        /// formatted data that may be decoded to supply argument values when
+        /// instantiating the command instance that is returned.
+        ///
+        ///\return a pointer to a command isntances that may be run at a later
+        /// time e.g. when executing the script that cause the command instance
+        /// to be created.
         static Model::Command::p_t factory(
             Model::StoredString::p_t storedString_p, std::string args)
         {
@@ -52,16 +96,27 @@ namespace Controller {
             return result;
         }
 
+        /// This constructor has the side effect of associating the function,
+        /// factory,  with the name, s_name, in CommandFactoryRegistry.
         InsertCharacterAtIndexAutoRegister()
         {
             CommandFactoryRegistry::registerFactory(s_name, factory);
         }
     };
 
+    /// This class is an implementation detail of the design to satisfy
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19).
+    /// A single compile time instance of this class automatically form
+    /// an association between the string name, s_name, and a corresponding
+    /// functions that return instances of a concrete Model::Command sunclass.
     struct RemoveCharacterAtIndexAutoRegister : CommandFactoryAutoRegister {
-
+        /// The name of the command as the name will appear in scripts
         static constexpr const char* s_name { "removeCharacterAtIndex" };
 
+        /// Reference InsertCharacterAtIndexAutoRegister::factory() for
+        /// information about this function. This function serves an identical
+        /// purpose except that this function produces instances of a different
+        /// concrete command subclass.
         static Model::Command::p_t factory(
             Model::StoredString::p_t storedString_p, std::string args)
         {
@@ -86,16 +141,25 @@ namespace Controller {
             return result;
         }
 
+        /// This constructor has the side effect of associating the function,
+        /// factory,  with the name, s_name, in CommandFactoryRegistry.
         RemoveCharacterAtIndexAutoRegister()
         {
             CommandFactoryRegistry::registerFactory(s_name, factory);
         }
     };
 
-    static InsertCharacterAtIndexAutoRegister
-        s_insertCharacterAtIndexAutoRegister {};
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19).
+    /// This declaration forces instantiation of
+    /// CommandFactoryAutoRegister instances at run time, and the instantiations
+    /// have the side effect of associating factory functions with a names via
+    /// CommandFactoryRegistry. The associations enable translation of scripting
+    /// language commands encoded as strings into Model::Command instances that
+    /// may be run (to execute the script) at run time.
+    static std::array<CommandFactoryAutoRegister, 2> autoRegisterers {
+        InsertCharacterAtIndexAutoRegister {},
+        RemoveCharacterAtIndexAutoRegister {},
+    };
 
-    static RemoveCharacterAtIndexAutoRegister
-        s_removeCharacterAtIndexAutoRegister {};
 } // namespace Controller
 } // namespace WSU

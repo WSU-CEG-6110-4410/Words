@@ -38,7 +38,7 @@ target_sources(tests PUBLIC
    tests/tests.cpp
    tests/commandTests.cpp
    tests/undoRedoTests.cpp
-   tests/CommandFactoryTests.cpp)
+   tests/ScriptingTests.cpp)
 target_link_libraries(tests PRIVATE gtest) # link google test to this executable
 set_property(TARGET tests PROPERTY CXX_STANDARD 11)
 

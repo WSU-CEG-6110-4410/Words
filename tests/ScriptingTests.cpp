@@ -34,7 +34,7 @@ TEST(CommandFactoryRegistry, issue19_removeCharacterAtIndex)
 }
 
 /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
-TEST(CommandFactoryRegistry, issue19_insertCharacterAtIndex_errorProperty)
+TEST(CommandFactoryRegistry, issue19_insertCharacterAtIndex_errorJSONProperty)
 {
     StoredString::p_t string_p { new WSU::Model::StoredString {} };
     WSU::Model::Command::p_t command_p { CommandFactoryRegistry::make(
@@ -44,11 +44,12 @@ TEST(CommandFactoryRegistry, issue19_insertCharacterAtIndex_errorProperty)
                 "character!" : "W",
                 "index" : 0
             })") };
+    GTEST_ASSERT_EQ(nullptr, command_p);
     GTEST_ASSERT_EQ("", string_p->getString());
 }
 
 /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
-TEST(CommandFactoryRegistry, issue19_removeCharacterAtIndex_errorProperty)
+TEST(CommandFactoryRegistry, issue19_removeCharacterAtIndex_errorJSONProperty)
 {
     StoredString::p_t string_p { new WSU::Model::StoredString {} };
     WSU::Model::Command::p_t command_p { CommandFactoryRegistry::make(
@@ -61,7 +62,7 @@ TEST(CommandFactoryRegistry, issue19_removeCharacterAtIndex_errorProperty)
 }
 
 /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
-TEST(CommandFactoryRegistry, issue19_removeCharacterAtIndex_errorSyntax)
+TEST(CommandFactoryRegistry, issue19_removeCharacterAtIndex_errorJSONSyntax)
 {
     StoredString::p_t string_p { new WSU::Model::StoredString {} };
     WSU::Model::Command::p_t command_p { CommandFactoryRegistry::make(
@@ -70,5 +71,21 @@ TEST(CommandFactoryRegistry, issue19_removeCharacterAtIndex_errorSyntax)
                 "command" --- "removeCharacterAtIndex",
                  "index!" : 0
             })") };
+    GTEST_ASSERT_EQ(nullptr, command_p);
+    GTEST_ASSERT_EQ("", string_p->getString());
+}
+
+/// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
+TEST(CommandFactoryRegistry,
+    issue19_removeCharacterAtIndex_errorNonexistentCommand)
+{
+    StoredString::p_t string_p { new WSU::Model::StoredString {} };
+    WSU::Model::Command::p_t command_p { CommandFactoryRegistry::make(
+        "fuCharacterAtIndex", string_p, R"(
+            {
+                "command" : "removeCharacterAtIndex",
+                 "index!" : 0
+            })") };
+    GTEST_ASSERT_EQ(nullptr, command_p);
     GTEST_ASSERT_EQ("", string_p->getString());
 }

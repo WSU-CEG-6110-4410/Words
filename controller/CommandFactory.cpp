@@ -14,8 +14,8 @@ namespace Controller {
         s_nameToFactoryMap.insert({ name, f });
     }
 
-    Model::Command::p_t CommandFactoryRegistry::make(std::string name,
-        Model::StoredString::p_t storedString_p, std::string args)
+    Model::Command::p_t CommandFactoryRegistry::make(const std::string& name,
+        Model::StoredString::p_t storedString_p, const std::string& args)
     {
         Model::Command::p_t result { nullptr };
 
