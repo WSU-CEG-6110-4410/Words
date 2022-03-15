@@ -76,6 +76,12 @@ namespace Controller {
             Model::StoredString::p_t storedString_p, const std::string& args);
     };
 
+    class ScriptRunner {
+    public:
+        static void run(
+            std::istream& inputStream, Model::StoredString::p_t storedString_p);
+    };
+
 } // namespace Controller
 } // namespace WSU
 

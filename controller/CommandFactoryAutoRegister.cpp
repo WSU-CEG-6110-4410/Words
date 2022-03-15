@@ -77,14 +77,12 @@ namespace Controller {
             std::string err;
             if (!parsedArgs.has_shape(
                     {
-                        { "command", json11::Json::STRING },
                         { "character", json11::Json::STRING },
                         { "index", json11::Json::NUMBER },
                     },
                     err)) {
                 std::cerr << "JSON Parse Error: " << err << '\n';
             } else {
-                assert(parsedArgs["command"].string_value() == s_name);
                 assert(0 < parsedArgs["character"].string_value().size());
                 const char c = parsedArgs["character"].string_value()[0];
                 const size_t index = (size_t)parsedArgs["index"].int_value();
@@ -125,13 +123,11 @@ namespace Controller {
             std::string err;
             if (!parsedArgs.has_shape(
                     {
-                        { "command", json11::Json::STRING },
                         { "index", json11::Json::NUMBER },
                     },
                     err)) {
                 std::cerr << "JSON Parse Error: " << err << '\n';
             } else {
-                assert(parsedArgs["command"].string_value() == s_name);
                 const size_t index = (size_t)parsedArgs["index"].int_value();
 
                 result = Model::Command::p_t(
