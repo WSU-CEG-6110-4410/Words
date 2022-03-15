@@ -104,7 +104,7 @@ namespace Controller {
         ///
         ///\param[in] inputStream : a stream to read
         ///\param[in] storedString_p : a pointer to the StoredString to be
-        ///manipulated by the script
+        /// manipulated by the script
         static void run(
             std::istream& inputStream, Model::StoredString::p_t storedString_p);
     };
