@@ -25,16 +25,20 @@ FetchContent_MakeAvailable(googletest)
 
 ###############################################################################
 add_executable(tests) 
-target_include_directories(tests PUBLIC model controller)
+target_include_directories(tests PUBLIC model controller json)
 target_sources(tests PUBLIC 
    model/InsertCharacterAtIndexCommand.cpp
    model/RemoveCharacterAtIndexCommand.cpp
    model/StoredString.cpp
    model/StoredString.h
    controller/UndoRedoManager.cpp
+   controller/CommandFactory.cpp
+   controller/CommandFactoryAutoRegister.cpp
+   json/json11.cpp
    tests/tests.cpp
    tests/commandTests.cpp
-   tests/undoRedoTests.cpp)
+   tests/undoRedoTests.cpp
+   tests/CommandFactoryTests.cpp)
 target_link_libraries(tests PRIVATE gtest) # link google test to this executable
 set_property(TARGET tests PROPERTY CXX_STANDARD 11)
 
@@ -42,8 +46,8 @@ set_property(TARGET tests PROPERTY CXX_STANDARD 11)
 add_custom_target(coverage
     COMMAND tests
     COMMAND llvm-profdata merge -sparse default.profraw -o cumulative.profdata
-    COMMAND llvm-cov show -ignore-filename-regex='../google*/*' -format="html" ./tests -instr-profile=cumulative.profdata > coverageLines.html
-    COMMAND llvm-cov report -show-region-summary=false -ignore-filename-regex='../google*/*'  ./tests -instr-profile=cumulative.profdata > coverageSummary.txt
+    COMMAND llvm-cov show -ignore-filename-regex='../google*/*' -ignore-filename-regex='../json/*' -format="html" ./tests -instr-profile=cumulative.profdata > coverageLines.html
+    COMMAND llvm-cov report -show-region-summary=false -ignore-filename-regex='../google*/*' -ignore-filename-regex='../json/*'  ./tests -instr-profile=cumulative.profdata > coverageSummary.txt
     COMMAND cat coverageSummary.txt
 )
 add_dependencies(coverage tests)
@@ -91,7 +95,8 @@ if(CLANG_FORMAT)
     file(GLOB_RECURSE ALL_CXX_SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/model/*.cpp
         ${PROJECT_SOURCE_DIR}/model/*.h
-        ${PROJECT_SOURCE_DIR}/model/*.hpp
+        ${PROJECT_SOURCE_DIR}/controller/*.cpp
+        ${PROJECT_SOURCE_DIR}/controller/*.h
         ${PROJECT_SOURCE_DIR}/tests/*.cpp
     )
 

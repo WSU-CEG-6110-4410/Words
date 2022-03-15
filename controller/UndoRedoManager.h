@@ -22,10 +22,10 @@ namespace Controller {
         bool m_isUndoing { false };
 
     public:
-        /// 
+        ///
         void undo();
 
-        /// 
+        ///
         void redo();
 
         /// This function pushes a reciprocal of
