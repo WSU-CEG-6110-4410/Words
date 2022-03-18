@@ -5,7 +5,7 @@
 #include <string>
 
 /// This entire project is part of a demonstration for Wright State University
-/// (WSU) CSE-4110 "Intro. Software Eng." Spring 2021.
+/// (WSU) CSE-4110/6110 "Intro. Software Eng." Spring 2022.
 namespace WSU {
 
 /// \anchor Model Model Subsystem
@@ -112,20 +112,14 @@ namespace Model {
             StoredString::p_t m_storedString_p;
 
         public:
+            ///\param[in] a pointer to the stored string that may be manipulated
+            /// by Command instances e.g. by Command subclasses that insert or
+            /// remove characters when the command(s) are run.
             Command(StoredString::p_t storedString_p);
 
             /// \return a pointer to the string effected by the Command
             StoredString::p_t getStoredString() const;
-        };
-
-        /// Type for Factory Methods. Having a standard type simplifies use of
-        /// [Factory
-        /// Methods](https://en.wikipedia.org/wiki/Factory_method_pattern)
-        /// because the caller need not know any details (like special
-        /// arguments) about the object(s) created by the Factory Method.
-        typedef std::function<command_p_t(p_t storedString_p, std::string args)>
-            commandFactory_t;
-
+        }; // class Command
     }; // class StoredString
 
 } // namespace Model

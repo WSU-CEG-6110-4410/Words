@@ -8,6 +8,9 @@
 namespace WSU {
 namespace Model {
 
+    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15) The
+    /// Command Pattern is used to implement undo, redo, and potentially other
+    /// features.
     /// This class is an "interface" for Commands within the [Command Design
     /// Pattern](https://en.wikipedia.org/wiki/Command_pattern) "In
     /// object-oriented programming, the command pattern is a behavioral design
@@ -15,9 +18,6 @@ namespace Model {
     /// to perform an action or trigger an event at a later time. This
     /// information includes the method name, the object that owns the method
     /// and values for the method parameters." -wikipedia
-    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15) The
-    /// Command Pattern is used to implement undo, redo, and potentially other
-    /// features.
     class Command {
     public:
         typedef std::shared_ptr<Command> p_t;
@@ -31,8 +31,7 @@ namespace Model {
 
     public:
         /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
-        /// To
-        /// do, undo, or redo and operation, it is necessary to "run" the
+        /// To do, undo, or redo an operation, it is necessary to "run" the
         /// operation.
         virtual void run() = 0;
 
@@ -50,6 +49,9 @@ namespace Model {
         /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
         /// In order to be able to undo a command, the reciprocal of the command
         /// is needed.
+        ///
+        ///\return a Command instance that when run undoes the effects of
+        /// running this command.
         virtual p_t makeReciprocalCommand() = 0;
     };
 
