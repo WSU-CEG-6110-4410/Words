@@ -5,6 +5,7 @@
 #include <array>
 #include <cassert>
 #include <iostream>
+#include <stdexcept>
 
 namespace WSU {
 namespace Controller {
@@ -39,7 +40,8 @@ namespace Controller {
             std::string err;
             auto result = json11::Json::parse(s, err);
             if (json11::Json() == result) {
-                std::cerr << "JSON Parse Error: " << err << '\n';
+                throw(std::invalid_argument { err });
+                // std::cerr << " JSON Parse Error: " << err << '\n';
             }
             return result;
         }
@@ -83,7 +85,7 @@ namespace Controller {
                         { "index", json11::Json::NUMBER },
                     },
                     err)) {
-                std::cerr << "JSON Parse Error: " << err << '\n';
+                throw(std::invalid_argument { err });
             } else {
                 assert(0 < parsedArgs["character"].string_value().size());
                 const char c = parsedArgs["character"].string_value()[0];
@@ -130,7 +132,7 @@ namespace Controller {
                         { "index", json11::Json::NUMBER },
                     },
                     err)) {
-                std::cerr << "JSON Parse Error: " << err << '\n';
+                throw(std::invalid_argument { err });
             } else {
                 const size_t index = (size_t)parsedArgs["index"].int_value();
 

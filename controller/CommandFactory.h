@@ -64,8 +64,6 @@ namespace Controller {
         ///
         ///\param[in] name : the name with which the desired command was
         /// registered via registerFactory()
-        ///\param[in] storedString_p : a pointer to the StoredString to be
-        /// manipulated via the command instance to be made.
         ///\param[in] args : a string containing arguments to be used by the
         /// command instance to be made. The format and content of args depends
         /// on the command to be made and the syntax of the scripting language
