@@ -101,9 +101,13 @@ namespace Controller {
 
         /// This constructor has the side effect of associating the function,
         /// factory,  with the name, s_name, in CommandFactoryRegistry.
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
         InsertCharacterAtIndexAutoRegister(
             Model::StoredString::p_t storedString_p)
         {
+            // [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
+            // Use bind() to remove storedString_p dependency in code that uses
+            // the command.
             CommandFactoryRegistry::registerFactory(
                 s_name, std::bind<>(factory, storedString_p, _1));
         }
@@ -147,9 +151,13 @@ namespace Controller {
 
         /// This constructor has the side effect of associating the function,
         /// factory,  with the name, s_name, in CommandFactoryRegistry.
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
         RemoveCharacterAtIndexAutoRegister(
             Model::StoredString::p_t storedString_p)
         {
+            // [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
+            // Use bind() to remove storedString_p dependency in code that uses
+            // the command.
             CommandFactoryRegistry::registerFactory(
                 s_name, std::bind<>(factory, storedString_p, _1));
         }
