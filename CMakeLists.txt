@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "-g -O0 -std=c++11 -stdlib=libc++ -U__STRICT_ANSI__ -fprofile-instr-generate -fcoverage-mapping")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ###############################################################################
 project(WordsExampleSpring2022) 
@@ -33,7 +34,6 @@ target_sources(tests PUBLIC
    model/StoredString.h
    controller/UndoRedoManager.cpp
    controller/CommandFactory.cpp
-   controller/CommandFactoryAutoRegister.cpp
    json/json11.cpp
    tests/tests.cpp
    tests/commandTests.cpp
@@ -110,6 +110,32 @@ if(CLANG_FORMAT)
     endif()
 
     add_dependencies(format ${PROJECT_NAME}_format)
+endif()
+
+###############################################################################
+#Add target to format code 
+if(NOT CLANG_ANALYZE)
+    find_program(CLANG_ANALYZE "clang-tidy")
+endif()
+if(CLANG_ANALYZE)
+    file(GLOB_RECURSE ALL_CXX_SOURCE_FILES
+        ${PROJECT_SOURCE_DIR}/model/*.cpp
+        ${PROJECT_SOURCE_DIR}/model/*.h
+        ${PROJECT_SOURCE_DIR}/controller/*.cpp
+        ${PROJECT_SOURCE_DIR}/controller/*.h
+        ${PROJECT_SOURCE_DIR}/tests/*.cpp
+    )
+
+    add_custom_target(
+        ${PROJECT_NAME}_analyze
+        COMMAND clang-tidy -p . ${ALL_CXX_SOURCE_FILES}
+    )
+
+    if(NOT TARGET analyze)
+        add_custom_target(analyze)
+    endif()
+
+    add_dependencies(analyze ${PROJECT_NAME}_analyze)
 endif()
 
 # Format code _before_ building so that formatting will not change

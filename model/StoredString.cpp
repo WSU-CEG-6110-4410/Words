@@ -48,13 +48,6 @@ namespace Model {
         return m_storedString_p;
     }
 
-    // StoredString::factoryMap_t &StoredString::getNameToFactoryMap()
-    // {
-    //   static StoredString::factoryMap_t nameToFactoryMap;
-
-    //   return nameToFactoryMap;
-    // }
-
 } // namespace Model
 
 } // namespace WSU

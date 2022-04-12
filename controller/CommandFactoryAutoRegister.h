@@ -5,9 +5,12 @@
 #include <array>
 #include <cassert>
 #include <iostream>
+#include <stdexcept>
 
 namespace WSU {
 namespace Controller {
+
+    using namespace std::placeholders; // for _1, _2, _3...
 
     /// This is a base class for classes used to automatically form
     /// associations between string names and corresponding functions that
@@ -37,7 +40,8 @@ namespace Controller {
             std::string err;
             auto result = json11::Json::parse(s, err);
             if (json11::Json() == result) {
-                std::cerr << "JSON Parse Error: " << err << '\n';
+                // [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/30)
+                throw(std::invalid_argument { err });
             }
             return result;
         }
@@ -81,7 +85,8 @@ namespace Controller {
                         { "index", json11::Json::NUMBER },
                     },
                     err)) {
-                std::cerr << "JSON Parse Error: " << err << '\n';
+                // [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/30)
+                throw(std::invalid_argument { err });
             } else {
                 assert(0 < parsedArgs["character"].string_value().size());
                 const char c = parsedArgs["character"].string_value()[0];
@@ -96,9 +101,15 @@ namespace Controller {
 
         /// This constructor has the side effect of associating the function,
         /// factory,  with the name, s_name, in CommandFactoryRegistry.
-        InsertCharacterAtIndexAutoRegister()
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
+        InsertCharacterAtIndexAutoRegister(
+            Model::StoredString::p_t storedString_p)
         {
-            CommandFactoryRegistry::registerFactory(s_name, factory);
+            // [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
+            // Use bind() to remove storedString_p dependency in code that uses
+            // the command.
+            CommandFactoryRegistry::registerFactory(
+                s_name, std::bind<>(factory, storedString_p, _1));
         }
     };
 
@@ -126,7 +137,8 @@ namespace Controller {
                         { "index", json11::Json::NUMBER },
                     },
                     err)) {
-                std::cerr << "JSON Parse Error: " << err << '\n';
+                // [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/30)
+                throw(std::invalid_argument { err });
             } else {
                 const size_t index = (size_t)parsedArgs["index"].int_value();
 
@@ -139,22 +151,16 @@ namespace Controller {
 
         /// This constructor has the side effect of associating the function,
         /// factory,  with the name, s_name, in CommandFactoryRegistry.
-        RemoveCharacterAtIndexAutoRegister()
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
+        RemoveCharacterAtIndexAutoRegister(
+            Model::StoredString::p_t storedString_p)
         {
-            CommandFactoryRegistry::registerFactory(s_name, factory);
+            // [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/29).
+            // Use bind() to remove storedString_p dependency in code that uses
+            // the command.
+            CommandFactoryRegistry::registerFactory(
+                s_name, std::bind<>(factory, storedString_p, _1));
         }
-    };
-
-    /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19).
-    /// This declaration forces instantiation of
-    /// CommandFactoryAutoRegister instances at run time, and the instantiations
-    /// have the side effect of associating factory functions with a names via
-    /// CommandFactoryRegistry. The associations enable translation of scripting
-    /// language commands encoded as strings into Model::Command instances that
-    /// may be run (to execute the script) at run time.
-    static std::array<CommandFactoryAutoRegister, 2> autoRegisterers {
-        InsertCharacterAtIndexAutoRegister {},
-        RemoveCharacterAtIndexAutoRegister {},
     };
 
 } // namespace Controller

@@ -1,6 +1,7 @@
 #ifndef UndoRedoManager_H
 #define UndoRedoManager_H
-#include "StoredString.h"
+
+#include "Command.h"
 #include <vector>
 
 namespace WSU {
@@ -12,10 +13,10 @@ namespace Controller {
     class UndoRedoManager {
     private:
         /// Use a vector as a stack of commands
-        std::vector<Model::StoredString::Command::p_t> m_undoStack;
+        std::vector<Model::Command::p_t> m_undoStack;
 
         /// Use a vector as a stack of commands
-        std::vector<Model::StoredString::Command::p_t> m_redoStack;
+        std::vector<Model::Command::p_t> m_redoStack;
 
         /// Variable is used to detect when a command is run as result
         /// of an undo so a reciprocal command is pushed onto the redo stack.
@@ -35,7 +36,7 @@ namespace Controller {
         /// This function pushes a reciprocal of
         /// cmd_p onto an undo or redo stack based on whether the function is
         /// called in the midst of an undo operation or not.
-        void runCommand(Model::StoredString::Command::p_t cmd_p);
+        void runCommand(Model::Command::p_t cmd_p);
     };
 
 } // namespace Controller
