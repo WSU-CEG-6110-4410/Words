@@ -15,14 +15,14 @@ namespace Controller {
         s_nameToFactoryMap.insert({ name, f });
     }
 
-    Model::Command::p_t CommandFactoryRegistry::make(const std::string& name,
-        Model::StoredString::p_t storedString_p, const std::string& args)
+    Model::Command::p_t CommandFactoryRegistry::make(
+        const std::string& name, const std::string& args)
     {
         Model::Command::p_t result { nullptr };
 
         auto it { s_nameToFactoryMap.find(name) };
         if (s_nameToFactoryMap.end() != it) {
-            result = it->second(storedString_p, args);
+            result = it->second(args);
         }
         return result;
     }
@@ -34,8 +34,7 @@ namespace Controller {
         return s;
     }
 
-    void ScriptRunner::run(
-        std::istream& inputStream, Model::StoredString::p_t storedString_p)
+    void ScriptRunner::run(std::istream& inputStream)
     {
         std::string line;
         while (std::getline(inputStream, line)) {
@@ -49,8 +48,7 @@ namespace Controller {
                 std::string commandArgs { line.substr(
                     commandNameDelimiterIndex) };
                 WSU::Model::Command::p_t command_p {
-                    CommandFactoryRegistry::make(
-                        commandName, storedString_p, commandArgs)
+                    CommandFactoryRegistry::make(commandName, commandArgs)
                 };
                 command_p->run();
             }

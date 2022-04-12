@@ -18,8 +18,7 @@ namespace Controller {
     /// pattern and the [Factory
     /// Method](https://en.wikipedia.org/wiki/Factory_method_pattern) design
     /// pattern.
-    typedef std::function<Model::Command::p_t(
-        Model::StoredString::p_t storedString_p, std::string args)>
+    typedef std::function<Model::Command::p_t(std::string args)>
         commandFactory_t;
 
     /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/19)
@@ -72,8 +71,8 @@ namespace Controller {
         /// command instance to be made. The format and content of args depends
         /// on the command to be made and the syntax of the scripting language
         /// used to make commands.
-        static Model::Command::p_t make(const std::string& name,
-            Model::StoredString::p_t storedString_p, const std::string& args);
+        static Model::Command::p_t make(
+            const std::string& name, const std::string& args);
     };
 
     /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/20)
@@ -103,10 +102,7 @@ namespace Controller {
         /// This function runs a script read from inputStream.
         ///
         ///\param[in] inputStream : a stream to read
-        ///\param[in] storedString_p : a pointer to the StoredString to be
-        /// manipulated by the script
-        static void run(
-            std::istream& inputStream, Model::StoredString::p_t storedString_p);
+        static void run(std::istream& inputStream);
     };
 
 } // namespace Controller
