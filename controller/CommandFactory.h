@@ -2,7 +2,6 @@
 #define CommandFactory_H
 
 #include "Command.h"
-#include "StoredString.h"
 #include <functional>
 #include <string>
 #include <unordered_map>

@@ -19,7 +19,7 @@ namespace Controller {
         runCommand(cmd_p);
     }
 
-    void UndoRedoManager::runCommand(Model::StoredString::Command::p_t cmd_p)
+    void UndoRedoManager::runCommand(Model::Command::p_t cmd_p)
     {
         if (!m_isUndoing) {
             m_undoStack.push_back(cmd_p->makeReciprocalCommand());
