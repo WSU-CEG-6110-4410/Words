@@ -96,21 +96,27 @@ namespace Model {
         /// is not modified.
         void insertStringAtIndex(const StoredString& s, std::size_t index);
 
+        /// This type defines a pointer to a Command
+        typedef typename WSU::Model::Command::p_t command_p_t;
+
+        /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
         /// This is an abstract base class for Commands that operate upon Stored
-        /// String instances.
+        /// String instances. Commands are pert of the "Command" Design Pattern
+        /// and used to implement undo/redo.
         class Command : public WSU::Model::Command {
         private:
+            /// [issue](https://github.com/WSU-CEG-6110-4410/Words/issues/15)
+            /// This is a pointer to the string to be modified by the command
+            /// when the command is executed (possibly as part of an undo/redo
+            /// operation.)
             StoredString::p_t m_storedString_p;
 
         public:
-            typedef typename WSU::Model::Command::p_t p_t;
-
             Command(StoredString::p_t storedString_p);
 
+            /// \return a pointer to the string effected by the Command
             StoredString::p_t getStoredString() const;
         };
-
-        typedef typename WSU::Model::Command::p_t command_p_t;
 
         /// Type for Factory Methods. Having a standard type simplifies use of
         /// [Factory
